@@ -20,7 +20,7 @@ export function GearAccordion() {
         onClick={() => setIsGearOpen(!isGearOpen)}
         className="flex justify-between items-center w-full p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200"
       >
-        <span className="text-white font-medium text-sm">My Photography Gear</span>
+        <span className="text-white font-medium text-sm">photography gear</span>
         <span className="text-accent text-lg transition-transform duration-200">
           {isGearOpen ? "−" : "+"}
         </span>

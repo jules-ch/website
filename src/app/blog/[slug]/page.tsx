@@ -40,20 +40,11 @@ export async function generateMetadata({ params }: PageProps) {
       description: post.metadata.description,
       publishedTime,
       type: "article",
-      url: `https://www.nexxel.dev/blog/${post.slug}`,
+      url: `https://www.julescheron.come/blog/${post.slug}`,
       images: [
         {
-          url: `https://www.nexxel.dev/og/blog?title=${post.metadata.title}`,
+          url: `https://www.julescheron.com/og/blog?title=${post.metadata.title}`,
         },
-      ],
-    },
-    twitter: {
-      title: post.metadata.title,
-      description: post.metadata.description,
-      card: "summary_large_image",
-      creator: "@nexxeln",
-      images: [
-        `https://www.nexxel.dev/og/blog?title=${post.metadata.title}&top=${publishedTime}`,
       ],
     },
   }
@@ -79,12 +70,12 @@ export default async function Post({ params }: PageProps) {
             datePublished: post.metadata.date,
             dateModified: post.metadata.date,
             description: post.metadata.description,
-            image: `https://nexxel.dev/og/blog?title=${post.metadata.title
+            image: `https://julescheron.com/og/blog?title=${post.metadata.title
               }&top=${formatDate(post.metadata.date)}`,
-            url: `https://nexxel.dev/blog/${post.slug}`,
+            url: `https://julescheron.com/blog/${post.slug}`,
             author: {
               "@type": "Person",
-              name: "Shoubhit Dash",
+              name: "Jules Chéron",
             },
           }),
         }}

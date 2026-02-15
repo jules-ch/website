@@ -63,7 +63,7 @@ export function Navbar() {
           href="/photography"
           className="hover:text-accent transition-colors duration-200"
         >
-          [g] photography
+          [g] gallery
         </Link>
       </div>
     </nav>

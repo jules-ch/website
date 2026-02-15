@@ -22,7 +22,10 @@ export function Header() {
       <p className="leading-relaxed animate-fade-in-up">
         i&apos;m a 32 y/o software engineer. i'm passionate about science, math & physics in general. i enjoy language design, theoretical computer science
         and i live on the terminal. if i&apos;m not coding, i&apos;m probably
-        exploring outdoor, riding my bike or taking pictures with my camera.
+        exploring outdoor, riding my bike or taking pictures.
+      </p>
+      <p className="leading-relaxed animate-fade-in-up">
+        Mainly coding in <b>rust</b> & <b>python</b>.
       </p>
     </header>
   )

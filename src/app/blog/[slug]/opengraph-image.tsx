@@ -43,7 +43,7 @@ export default async function Image({
 }) {
   const { slug } = await params
   // const { searchParams } = new URL(request.url)
-  const title = "nexxel's blog"
+  const title = "julesch's blog"
 
   return new ImageResponse(
     (
@@ -62,7 +62,7 @@ export default async function Image({
         }}
       >
         <img
-          src="https://www.nexxel.dev/nexxel.jpg"
+          src="https://www.julescheron.com/julesch.jpg"
           style={{
             position: "absolute",
             bottom: "40px",

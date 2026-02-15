@@ -4,15 +4,14 @@ import { Metadata } from "next"
 
 const projects = [
   {
-    title: "adventure map app",
+    title: "outdoor mobile app",
     description:
-      "a live tracking mobile app for your outdoor adventures",
+      "a live tracking mobile app for your outdoor adventures.",
     role: "creator",
     period: "jun 2024 - present",
     achievements: [
-      "grew project to 24k+ github stars",
-      "wrote education blog posts with over 100k views",
-      "maintained comprehensive, up-to-date documentation",
+      "share in real time you adventures.",
+      "public real time tracker with routing capabilities",
     ],
     technologies: [
       "python",
@@ -21,8 +20,9 @@ const projects = [
       "influxdb",
       "mqtt",
       "rust",
+      "apache arrow"
     ],
-    href: "https://create.t3.gg",
+    href: "",
   },
   {
     title: "PV agrivoltaic simulator",
@@ -58,20 +58,7 @@ const projects = [
     ],
     technologies: ["python"],
     href: "https://github.com/jules-ch/wind-stats",
-  },
-  {
-    title: "fp_",
-    description: "a functional programming library for typescript",
-    role: "creator",
-    period: "feb 2023",
-    achievements: [
-      "implemented a comprehensive set of functional programming constructs",
-      "wrote documentation and examples to help developers understand and use the library",
-      "published to deno package registry",
-    ],
-    technologies: ["typescript"],
-    href: "https://github.com/nexxeln/fp",
-  },
+  }
 ]
 
 export default function ProjectsPage() {

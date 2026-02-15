@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import Image from "next/image"
 
+import styles from "./photo-modal.module.css"
 interface Props {
   id: string
   // blurSrc: string
@@ -24,7 +25,7 @@ export function PhotoModal({ id, alt, onClose }: Props) {
   }, [onClose])
 
   // Build URLs
-  const low = `${CDN}/cdn-cgi/image/width=200,q=70,blur=5/${id}`
+  const low = `${CDN}/cdn-cgi/image/width=512,q=80,blur=50,compression=fast/${id}`
   const base = `${CDN}/cdn-cgi/image/width=1920,slow-connection-quality=50/${id}`
 
 
@@ -36,7 +37,7 @@ export function PhotoModal({ id, alt, onClose }: Props) {
   `
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-lg animate-fade-in cursor-pointer"
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-lg cursor-pointer ${styles.animateFadeIn}`}
       onClick={onClose} // any click closes modal
     >
       <div className="relative w-[90vw] h-[90vh] rounded-xl shadow-2xl">

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react"
 import { PhotoModal } from "@/components/photo-modal"
-
+import styles from "./photo-gallery.module.css"  // Import the CSS Module
 import photos from "@/data/photos.json"
 function getDailySeed(date: Date): number {
   // Get today's date at midnight UTC to ensure consistency across timezones
@@ -75,7 +75,7 @@ export function PhotoGallery() {
       {/* Tag Filters */}
       <div className="flex flex-wrap gap-2 mb-4">
         <button
-          className={`tag-button ${!selectedTag ? "active" : ""}`}
+          className={`${styles.tagButton} ${!selectedTag ? styles.active : ""}`}
           onClick={() => setSelectedTag(null)}
         >
           All
@@ -84,7 +84,7 @@ export function PhotoGallery() {
         {allTags.map((tag) => (
           <button
             key={tag}
-            className={`tag-button ${selectedTag === tag ? "active" : ""}`}
+            className={`${styles.tagButton} ${selectedTag === tag ? styles.active : ""}`}
             onClick={() => setSelectedTag(tag)}
           >
             {tag}

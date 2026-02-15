@@ -1,0 +1,58 @@
+---
+title: "New website, Easy flow"
+description: "I wanted to update my blog website and decided to move to a static one."
+date: "February 15, 2026"
+---
+
+It's been a while I haven't posted an article and I also wanted to update my personal blog.
+
+My previous one was using [Ghost CMS](https://ghost.org/) and a custom theme I found on github. It was good, but I felt it was not good enough for what I had in mind. A place to share thoughts and also share photos from my travels and adventures.
+
+I liked Ghost, the editor was really nice to handle draft and preview. But it is just too much for such a small website. The deployment is a bit of pain, you need MariaDB to persists all your blog posts.
+There are a lot of cheap webhosting solution but it is just a lot for just a simple website to show posts and images.
+
+## Performance
+
+When it comes to performance or even bandwidth static website are the best. In todays world everything is dynamic, there are [new JS frameworks everyday](https://dayssincelastjavascriptframework.com/) but for a personal website, nothing beats a static website. It's easy to host, no database, no server, easy peasy.
+
+There are plenty of options for SSG (Static Site Generation), [Nextjs](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation) is the most widely known.
+
+The good things about having the whole website as static, is that it can leverage client and CDN caching like crazy. Just put your index.html and your assets in a S3 bucket, serve it with a CDN (e.g. Clouflare or AWS Cloudfront) and your good to go, no infracost.
+
+
+## Meet easy deployment
+
+Deployment for such a simple website should be easy, I don't want to maintain a server for such a simple website and s should you. Just build your index.html, CSS, JS and push it to S3 and done. No infra cost.
+
+## Photo gallery
+
+Being a amateur of photography, I wanted a picture wall where I can share photos of my travels. The thing with templates is that its difficult to have custom flavors.
+
+
+![Gallery](https://pub-d019caaded0c463cb286249e843f9968.r2.dev/posts/Screenshot%20from%202026-02-15%2018-58-53.png)
+
+
+Blog frameworks are kinda limited in that aspects, there are some options but they are limited to this
+fonctionality. I needed a minimalistic website where I can share my projects, my thoughts and my photos, nothing more, nothing less
+
+
+Most CDN now can host your pictures and provides API to serve them to your users, crop, blur, downsize you name it. Your picture are served and cached as close as possible from your users. Still no infra costs it's bundled as is.
+I'm using [Cloudflare](https://developers.cloudflare.com/images/transform-images/transform-via-url/) here but AWS and other cloud provider have similar API's.
+
+Now when loading pages users will download low quality pictures for the gallery and will display blurred pictures when clicking while high quality pictures are download in the background. Looking good so far.
+
+Gallery order is randomized to have new pictures everyday, no cron or pipelines to maintain. Just a `json` file to maintain with `urls` and `tags` for filtering.
+
+## The Design
+
+Needs:
+
+- A picture wall with quick tag toggles
+- Performant hosting and downloads with CDN.
+- Randomizing pictures order for a fresh sample everyday
+
+
+
+
+
+

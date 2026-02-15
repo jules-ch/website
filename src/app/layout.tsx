@@ -10,20 +10,20 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.nexxel.dev"),
+  metadataBase: new URL("https://www.julescheron.com"),
   title: {
-    default: "Shoubhit Dash",
-    template: "%s | Shoubhit Dash",
+    default: "Jules Chéron",
+    template: "%s | Jules Chéron",
   },
   description: "Developer, cardist and maker of things.",
   openGraph: {
-    title: "Shoubhit Dash",
+    title: "Jules CHéron",
     description: "Developer, cardist and maker of things.",
-    url: "https://www.nexxel.dev",
-    siteName: "Shoubhit Dash",
+    url: "https://www.julescheron.com",
+    siteName: "Jules Chéron",
     locale: "en_US",
     type: "website",
-    images: ["https://www.nexxel.dev/og/home"],
+    images: ["https://julescheron.com/og/home"],
   },
   robots: {
     index: true,
@@ -32,11 +32,11 @@ export const metadata: Metadata = {
     "max-image-preview": "large",
     "max-snippet": -1,
   },
-  twitter: {
-    title: "Shoubhit Dash",
-    card: "summary_large_image",
-    creator: "@nexxeln",
-  },
+  // twitter: {
+  //   title: "Jules Chéron",
+  //   card: "summary_large_image",
+  //   creator: "@nexxeln",
+  // },
 }
 
 export default function RootLayout({
