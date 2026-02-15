@@ -31,17 +31,16 @@ const workItems: Item[] = [
 
 const projectItems = [
   {
-    title: "create-t3-app",
-    role: "creator and maintainer",
+    title: "outdoor mobile app",
     description:
-      "open-source project for initializing full-stack next.js apps. 24k+ stars, 200+ contributors",
-    href: "https://create.t3.gg",
+      "a live tracking mobile app for your outdoor adventures.",
+    role: "creator",
+    href: "",
   },
   {
-    title: "mini-git",
-    role: "creator",
-    description: "simplified version of git from scratch",
-    href: "https://github.com/nexxeln/mini-git",
+    title: "pint",
+    description: "pint is a python package to define, operate and manipulate physical quantities",
+    href: "https://github.com/hgrecco/pint",
   },
 ]
 

@@ -62,7 +62,7 @@ export default async function Image({
         }}
       >
         <img
-          src="https://www.julescheron.com/julesch.jpg"
+          src="https://avatars.githubusercontent.com/u/43635101"
           style={{
             position: "absolute",
             bottom: "40px",
