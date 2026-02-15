@@ -19,23 +19,24 @@ function getDailySeed(date: Date): number {
   return diffDays;
 }
 
-function shuffle<T>(array: T[], seed: number = 1): T[] {
-  let currentIndex = array.length, temporaryValue: T, randomIndex: number;
-  let random = function() {
-    let x = Math.sin(seed++) * 10000;
-    return x - Math.floor(x);
-  };
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(random() * currentIndex);
-    currentIndex -= 1;
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+// Fast PRNG - mulberry32, ~10x faster than Math.sin()
+function mulberry32(a: number) {
+  return function() {
+    let t = (a += 0x6D2B79F5)
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
   }
-  return array;
+}
+
+function shuffle<T>(array: T[], seed: number): T[] {
+  const arr = [...array]
+  const rng = mulberry32(seed)
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1))
+    ;[arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
 }
 
 
@@ -67,7 +68,7 @@ export function PhotoGallery() {
     return selectedTag
       ? shuffledPhotos.filter((photo) => (photo.tags as string[]).includes(selectedTag))
       : shuffledPhotos;
-  }, [selectedTag, shuffledPhotos, now]);
+  }, [selectedTag, shuffledPhotos]);
 
   if (!now) return null;
   return (
@@ -94,26 +95,22 @@ export function PhotoGallery() {
 
       {/* Thumbnail grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {filteredPhotos.map((photo) => (
+        {filteredPhotos.map((photo, index) => (
           <button
             key={photo.id}
             onClick={() => setActivePhoto(photo)}
             className="group relative overflow-hidden rounded-lg"
           >
             <img
-              key={photo.id}
               src={`https://photos.julescheron.com/cdn-cgi/image/width=400,format=webp,slow-connection-quality=50/${photo.id}`}
               alt={photo.alt}
+              loading={index < 6 ? "eager" : "lazy"}
               className="rounded-xl object-cover w-full h-72 cursor-pointer hover:opacity-80 transition"
-              onClick={() => setActivePhoto(photo)}
             />
             {/* Tooltip */}
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">
               <span className="text-white text-sm text-center px-2">{photo.alt}</span>
             </div>
-
-
-
           </button>
         ))}
       </div>
@@ -127,32 +124,6 @@ export function PhotoGallery() {
           onClose={() => setActivePhoto(null)}
         />
       )}
-
-      {/* CSS */}
-      <style jsx>{`
-        .tag-button {
-          padding: 0.25rem 0.75rem;
-          border-radius: 9999px;
-          border: 1px solid #4b5563; /* Tailwind gray-700 */
-          background-color: #374151; /* Tailwind gray-700 */
-          color: #d1d5db; /* Tailwind gray-300 */
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-
-        .tag-button:hover {
-          background-color: #4b5563; /* slightly lighter on hover */
-        }
-
-        .tag-button.active {
-          background-color: oklch(50.5% 0.213 27.518); /* Tailwind yellow-400 / accent */
-          color: #111827; /* Tailwind gray-900 / dark font */
-          font-weight: 600;
-        }
-      `}</style>
-
-
-
     </div>
   )
 }

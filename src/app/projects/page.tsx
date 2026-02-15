@@ -10,7 +10,7 @@ const projects = [
     role: "creator",
     period: "jun 2024 - present",
     achievements: [
-      "share in real time you adventures.",
+      "share in real time your adventures with friends and family.",
       "public real time tracker with routing capabilities",
     ],
     technologies: [
