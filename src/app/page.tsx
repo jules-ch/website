@@ -40,6 +40,7 @@ const projectItems = [
   {
     title: "pint",
     description: "pint is a python package to define, operate and manipulate physical quantities",
+    role: "maintainer",
     href: "https://github.com/hgrecco/pint",
   },
 ]
