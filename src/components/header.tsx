@@ -8,6 +8,7 @@ export function Header() {
         <span className="inline-block">
           <ScrambleText text="jules chéron" />
         </span>
+        <span className="text-accent">_</span>
       </h1>
       <div className="flex flex-col gap-2 text-gray-400">
         <div className="flex items-center gap-2">
