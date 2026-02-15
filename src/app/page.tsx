@@ -9,7 +9,7 @@ const workItems: Item[] = [
     role: "senior software engineer",
     period: "dec 2024 - present",
     description: "tackling CO2 in the real estate sector | crunching data on my spare time",
-    href: "https://deepki.com",
+    href: "https://www.deepki.com",
   },
   {
     title: "ombrea",
