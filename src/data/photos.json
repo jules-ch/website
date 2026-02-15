@@ -1,12 +1,16 @@
 [
   {
     "id": "2024_0421_19004300.jpg",
-    "tags": [],
+    "tags": [
+      "nature"
+    ],
     "alt": "pillars at uyuni desert"
   },
   {
     "id": "2026_0201_18115600.jpg",
-    "tags": [],
+    "tags": [
+      "sea"
+    ],
     "alt": "marseille"
   },
   {
@@ -24,7 +28,10 @@
   },
   {
     "id": "DSCF4091.jpg",
-    "tags": ["sea", "nature"],
+    "tags": [
+      "sea",
+      "nature"
+    ],
     "alt": "calanque d'en vau"
   },
   {
@@ -61,6 +68,9 @@
   },
   {
     "id": "DSCF9264.JPG",
-    "tags": []
+    "tags": [
+      "nature"
+    ],
+    "alt": "cerro castillo"
   }
 ]
