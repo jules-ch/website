@@ -46,6 +46,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://photos.julescheron.com" />
+        <link rel="dns-prefetch" href="https://photos.julescheron.com" />
+      </head>
       <body
         className={`${geistMono.variable} antialiased min-h-screen font-mono`}
       >
