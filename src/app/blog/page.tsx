@@ -14,6 +14,7 @@ export default async function BlogPage() {
       <h1 className="text-4xl font-bold mb-8 text-white">
         <span className="text-accent mr-2">*</span>
         <ScrambleText text="blog" />
+        <span className="text-accent">|</span>
       </h1>
 
       <p className="hidden sm:block text-sm text-gray-400 mb-8">

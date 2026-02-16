@@ -15,6 +15,7 @@ export default function PhotographyPage() {
       <h1 className="text-4xl font-bold mb-8 text-white">
         <span className="text-accent mr-2">*</span>
         <ScrambleText text="photography" />
+        <span className="text-accent">&</span>
       </h1>
       <section className="mb-12">
         <div className="lg:flex lg:gap-8">

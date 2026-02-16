@@ -67,6 +67,7 @@ export default function ProjectsPage() {
       <h1 className="text-4xl font-bold mb-8 text-white">
         <span className="text-accent mr-2">*</span>
         <ScrambleText text="projects" />
+        <span className="text-accent">$</span>
       </h1>
 
       <p className="text-gray-400 mb-12 leading-relaxed">

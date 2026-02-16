@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect } from "react"
-import Image from "next/image"
 
 import styles from "./photo-modal.module.css"
 interface Props {

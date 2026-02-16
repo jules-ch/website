@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   description: "Developer, cardist and maker of things.",
   openGraph: {
-    title: "Jules CHéron",
+    title: "Jules Chéron",
     description: "Developer, cardist and maker of things.",
     url: "https://www.julescheron.com",
     siteName: "Jules Chéron",
