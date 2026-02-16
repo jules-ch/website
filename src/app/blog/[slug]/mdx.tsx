@@ -75,7 +75,7 @@ async function Pre({
     const html = await codeToHtml(String(codeElement?.props.children), {
       lang,
       themes: {
-        dark: "vesper",
+        dark: "tokyo-night",
         light: "vitesse-light",
       },
     })

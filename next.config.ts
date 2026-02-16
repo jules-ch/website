@@ -3,7 +3,10 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
-  reactCompiler: true,
+  // reactCompiler: true,
+  compiler: {
+    removeConsole: true,
+  },
   experimental: {
     mdxRs: true,
     // ppr: true,

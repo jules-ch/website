@@ -19,7 +19,11 @@ function getDailySeed(date: Date): number {
   return diffDays;
 }
 
-// Fast PRNG - mulberry32, ~10x faster than Math.sin()
+/**
+ * Mulberry32 pseudorandom number generator
+ * @param a - Seed value for the RNG
+ * @returns A function that generates pseudorandom numbers between 0 and 1
+ */
 function mulberry32(a: number) {
   return function() {
     let t = (a += 0x6D2B79F5)
@@ -34,7 +38,7 @@ function shuffle<T>(array: T[], seed: number): T[] {
   const rng = mulberry32(seed)
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1))
-    ;[arr[i], arr[j]] = [arr[j], arr[i]]
+      ;[arr[i], arr[j]] = [arr[j], arr[i]]
   }
   return arr
 }
