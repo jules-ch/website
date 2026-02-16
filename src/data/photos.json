@@ -87,18 +87,26 @@
   },
   {
     "id": "DSCF8728.JPG",
+    "tags": [],
     "alt": "valpo vibe"
   },
   {
     "id": "DSCF8740.JPG",
+    "tags": [],
     "alt": "valpo street"
   },
   {
     "id": "DSCF8832.JPG",
+    "tags": [
+      "nature"
+    ],
     "alt": "araucaria"
   },
   {
     "id": "DSCF8835.JPG",
+    "tags": [
+      "nature"
+    ],
     "alt": "looking up"
   },
   {
@@ -111,7 +119,8 @@
   {
     "id": "DSCF9058.JPG",
     "tags": [
-      "nature"
+      "nature",
+      "sea"
     ],
     "alt": "kid fishing in the pacific"
   }
