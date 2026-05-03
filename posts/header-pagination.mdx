@@ -1,0 +1,159 @@
+---
+title: "Header pagination, the easy way with DRF"
+description: "Easy implementation of Header based pagination for your DRF API."
+date: "March 26, 2022"
+---
+
+
+
+Pagination can be seen as a best practice in the REST world when dealing with resources sets.
+
+There are many pagination out there and one of them is leveraging HTTP Headers to provide clients with pagination metadata.
+It uses at its base the standard [Link Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Link), the API can then serve links to first, last, previous & next pages URL to move between pages easily.
+
+One example of this kind of pagination is the [GitHub API](https://docs.github.com/en/rest/guides/traversing-with-pagination?ref=blog.julescheron.com), it gives JS examples to traverse the paginated pages.
+
+```http
+Link: <https://api.github.com/search/code?q=addClass+user%3Amozilla&page=15>; rel="next",
+  <https://api.github.com/search/code?q=addClass+user%3Amozilla&page=34>; rel="last",
+  <https://api.github.com/search/code?q=addClass+user%3Amozilla&page=1>; rel="first",
+  <https://api.github.com/search/code?q=addClass+user%3Amozilla&page=13>; rel="prev"
+```
+
+
+### Pros:
+- Unchanged response schema.
+- Easy to migrate to a paginated response.
+- Use of standard headers.
+### Cons:
+- Document your custom headers for pagination metadata
+- Here is an implementation of Header pagination in DRF:
+
+```python
+from __future__ import annotations
+
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+from rest_framework.utils.urls import remove_query_param, replace_query_param
+
+LinkHeader = str
+
+
+class HeaderPagination(PageNumberPagination):
+    """Header based pagination
+
+    Pagination metadata are specified in response's headers.
+    Information about pagination is provided in the Link header.
+
+    Headers:
+    --------
+    X-Page-Count: Total page count
+    X-Current-Page: Current page number
+    X-Page-Size: Item count in the current page
+    X-Total: Total number of item included if `include_count` is `True`
+
+    Link: previous, next, first & last links.
+          See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Link
+
+    Parameters
+    ----------
+    include_count: Include result set count in `X-Total` header.
+    """
+
+    page_size_query_param = "per_page"
+    include_count = True
+    page_size = 100
+
+    def get_links(self) -> list[LinkHeader]:
+        next_url = self.get_next_link()
+        previous_url = self.get_previous_link()
+        first_url = self.get_first_link()
+        last_url = self.get_last_link()
+        links = []
+        for url, label in (
+            (first_url, 'first'),
+            (previous_url, 'prev'),
+            (next_url, 'next'),
+            (last_url, 'last'),
+        ):
+            if url is not None:
+                links.append(f'<{url}>; rel="{label}"')
+        
+        return links
+
+    def get_paginated_response(self, data) -> Response:
+        links = self.get_links()
+
+        page_count = self.page.paginator.num_pages
+
+        headers = {
+            "X-Page-Count": page_count,
+            "X-Page-Size": self.page_size,
+            "X-Current-Page": self.page.number,
+        }
+
+        if self.include_count:
+            headers.update({"X-Total": self.page.paginator.count})
+
+        if links:
+            headers.update({'Link': ', '.join(links)})
+
+        return Response(data, headers=headers)
+
+    def get_first_link(self) -> str:
+        if not self.page.has_previous():
+            return None
+        else:
+            url = self.request.build_absolute_uri()
+            return remove_query_param(url, self.page_query_param)
+
+    def get_last_link(self) -> str:
+        if not self.page.has_next():
+            return None
+        else:
+            url = self.request.build_absolute_uri()
+            return replace_query_param(
+                url,
+                self.page_query_param,
+                self.page.paginator.num_pages,
+            )
+
+    def get_paginated_response_schema(self, schema: dict) -> dict:
+        return schema
+```
+
+Then you just have to apply `HeaderPagination` to your views:
+```python
+class RecordsView(generics.ListAPIView):
+    queryset = Record.objects.all()
+    serializer_class = RecordsSerializer
+    pagination_class = HeaderPagination
+```
+Or apply the style globally, using the `DEFAULT_PAGINATION_CLASS` settings key:
+```python
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'apps.core.pagination.HeaderPagination'
+}
+```
+
+Now when doing a request, the response will be paginated & pagination links/metadata will be included.
+```bash
+$ curl -I http://localhost:8000/api/records
+
+HTTP/1.1 200 OK
+Date: Sat, 26 Mar 2022 15:02:13 GMT
+Server: WSGIServer/0.2 CPython/3.8.9
+Content-Type: application/json
+X-Page-Count: 20
+X-Page-Size: 100
+X-Current-Page: 1
+X-Total: 2000
+Link: <http://localhost:8000/api/records?page=2>; rel="next", <http://localhost:8000/api/records?page=20>; rel="last"
+Vary: Accept, Cookie
+Allow: GET, HEAD, OPTIONS
+X-Frame-Options: DENY
+Content-Length: 7253
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+```
