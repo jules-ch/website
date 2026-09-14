@@ -16,7 +16,7 @@
     "next-mdx-remote": "^5.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "shiki": "^1.22.2",
+    "shiki": "^4.4.3",
     "use-scramble": "^2.2.15"
   },
   "devDependencies": {

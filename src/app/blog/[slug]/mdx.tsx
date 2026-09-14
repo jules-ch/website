@@ -1,7 +1,13 @@
 import { MDXRemote } from "next-mdx-remote/rsc"
 import Link from "next/link"
 import { Children, createElement, isValidElement } from "react"
-import { codeToHtml } from "shiki"
+import { createHighlighter } from "shiki"
+
+
+const highlighter = await createHighlighter({
+  themes: ['tokyo-night', 'vitesse-light'],
+  langs: ['just', 'http', 'bash', 'python', 'typescript']
+})
 
 function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
   let headers = data.headers.map((header, index) => (
@@ -72,7 +78,7 @@ async function Pre({
       return <code {...props}>{children}</code>
     }
 
-    const html = await codeToHtml(String(codeElement?.props.children), {
+    const html = highlighter.codeToHtml(String(codeElement?.props.children), {
       lang,
       themes: {
         dark: "tokyo-night",
