@@ -1,0 +1,75 @@
+---
+title: "My Current Dev Stack"
+description: "A breakdown of the tools I use every day for development — Neovim, Ghostty, just, Nix, uv, and direnv. This is my stack, why I use each tool, and why I'm not switching anytime soon."
+date: "Sep 14, 2026"
+---
+
+
+## Neovim
+
+[Neovim](https://neovim.io) is my editor, I switched 2 years ago from VSCode. I was happy with it but wanted a simpler / lighter alternative. I remember a colleague of mine who were a fan of `Vim`, felt it was so complicated to learn at the time and prefered good old `nano` for sysadmin or vscode locally.
+Well I get it now when you get used to `Vim` motions, you really feel like a wizard sometimes, well just sometimes.
+
+What makes modern Neovim special is the LSP support and the Lua plugin ecosystem. A small disclaimer, I think Neovim is not for everyone and I even advise to start with VSCode, the Dev Exp is quite good and it's easy to extend fonctionality with the extensions ecosystem.
+
+But if you've ever been curious, [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) is a fantastic starting point to start your config and neovim journey.
+
+## Ghostty + Zellij
+
+For my terminal emulator I recently switched to [ghostty](https://ghostty.org/) after using [alacritty](https://alacritty.org/) for a while, I feel like it is using less resources and is draining less battery.
+
+I pair it with [zellij](https://zellij.dev/) which is a delight for terminal multiplexing. It's got good defaults and you can customize your layouts, shortcuts and what not. I really advise you to check it out, it is a gem.
+
+Here is an example of what it looks like
+
+
+## just
+
+[just](https://just.systems) is my new go-to command runner, and it's quietly become one of my most-used tools. Think of it like `make` but without all the fuss - no tabs-vs-spaces insanity, no implicit file targets, just a clean `justfile` with named recipes.
+
+Every project I work on gets a `justfile` at the root. Common recipes look like:
+
+```just
+# Run the dev server
+dev:
+    uv run uvicorn app.main:app --reload
+
+# Run tests
+test:
+    uv run pytest
+
+# Format and lint
+check:
+    uv run ruff check . && uv run ruff format --check .
+```
+
+Now instead of remembering the exact incantation to start a project, I just run `just dev`. New contributors can run `just --list` and immediately see everything available. It's such a small thing but it makes projects feel so much more approachable.
+
+## Nix
+
+Okay, [Nix](https://nixos.org) is the one that takes some explaining. It's a package manager (and a whole OS if you want it) built around the idea of purely functional, reproducible builds. Every package is pinned, isolated, and described declaratively. With Nix `flakes` a simple `nix develop` will create a dev shell with everything ready.
+
+Nix is getting traction but is still a relatively new tool, but the gains are real. Being able to setup a reproducible dev environment with compilers, toolchains, libs can be quite tedious. `Nix` fills that gap.
+
+I have been looking at [Devenv](https://devenv.sh), I have to try it sometimes but for now flakes is enough for me.
+
+
+## uv
+
+[uv](https://docs.astral.sh/uv/) is the new Python package manager from [Astral](https://astral.sh). I don't think I need to introduce it, it does its job reliably, quickly. I can still remember the days where python packaging was a pain, you had to switch between so many different tools (pipenv, venv, twine, poetry, setuptools). The ecosystem now has good tooling after some standardization steps like PEP621. I was envying the rust ecosystem for `cargo` when rust came out.
+
+Things have changed and for the better.
+
+
+## direnv
+
+[direnv](https://direnv.net) is a nice addition to everyhting I cited previously.
+It allows me to load `.env` file automatically, source python virtual environment, auto activate nix shell.
+I really enjoy its simplicity, extensibility you can specify easily what's get loaded when you land on your local repository. Leave your directory, it unloads everything automatically :).
+Everything is ready to go the moment I `cd` into my project.
+
+
+## Conclusion
+
+
+
